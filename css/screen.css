@@ -1,0 +1,27 @@
+
+:root {
+    --global-color-back: #000000;
+    --global-color-front: #FFFFFF;
+
+}
+
+#mapid {
+    width: 80%;
+    
+    margin: 0 auto;
+    height: 300px;
+}
+
+.c-globe {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.c-globe canvas {
+    
+}
+
+.c-app {
+    
+}
