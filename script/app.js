@@ -95,8 +95,10 @@ function drawOrbit() {
     lights(255);    
 
 	rotateX(-90);
-	// orbital inclination of the ISS orbit = 51.6437 degrees
-    rotateY(51.6437);
+    // orbital inclination of the ISS orbit = 51.6437 degrees
+    let offset = sin(longitude)*90;
+    // console.log(longitude, offset);
+    rotateY(offset + 51.6437);
 	// use a torus to display the ISS's orbit
 	torus(350, 2, 50, 50);
 
