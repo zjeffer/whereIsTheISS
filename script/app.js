@@ -1,67 +1,45 @@
-let mapImage, ISSImage;
-
-//
-const provider = "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png";
-const copyright =
-	'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>';
-let map, layergroup, iss, data;
+let mapImage;
 
 let latitude = 0,
-	longitude = 0;
+	longitude = 0,
+	altitude = 0;
 
 // before loading everything else
 function preload() {
+	// TODO: better map?
     mapImage = loadImage("img/earth.png");
     ISSImage = loadImage("img/iss.png");
 }
 
 // setup canvas
 function setup() {
-	let canvas = createCanvas(800, 800, WEBGL);
+	let canvas = createCanvas(22*16, 22*16, WEBGL);
     canvas.parent("js-globe");
-    angleMode(DEGREES)
+    angleMode(DEGREES);
 
-    // TODO: fix image
-    image(ISSImage, 0, 0);
-	loadMap();
+	// get data from api
     getISSData();
-    
 }
 
-function loadMap() {
-	map = L.map("mapid").setView([0, 0], 1);
 
-	let ISSIcon = L.icon({
-		iconUrl: "/img/iss.png",
-		iconSize: [50, 30],
-		iconAnchor: [25, 15],
-		popupAnchor: [50, 25],
-		shadowUrl: "/img/iss.png",
-		shadowSize: [60, 40],
-		shadowAnchor: [30, 15],
-	});
-
-	iss = L.marker([0, 0], { icon: ISSIcon }).addTo(map);
-	L.tileLayer(provider, { attribution: copyright }).addTo(map);
+//p5js function that responds to window resizing
+function windowResized(){
+	resizeCanvas(22*16, 22*16);
 }
 
 function getISSData() {
 	$.getJSON("https://api.wheretheiss.at/v1/satellites/25544", function (data) {
-		console.log(data);
+		//console.log(data);
 		latitude = data["latitude"];
 		longitude = data["longitude"];
-		moveISS();
+		altitude = data["altitude"];
 	});
-}
-
-function moveISS() {
-	// The update to the map
-	iss.setLatLng([latitude, longitude]);
-	map.panTo([latitude, longitude], (animate = true));
 	setTimeout(() => {
 		getISSData();
 	}, 2000);
 }
+
+
 
 function drawEarth() {
 	push();
@@ -74,6 +52,7 @@ function drawEarth() {
 	// apply the map texture
 	texture(mapImage);
 
+
 	let circEquator = 40075;
 	let circMeridonial = 40007;
 	let ratio = circEquator / circMeridonial;
@@ -81,13 +60,13 @@ function drawEarth() {
     rotateX(-latitude);
 	rotateY(180 - longitude);
 
-	width = 300;
-	height = width;
-	ellipsoid(width, height);
+	// sizeX, sizeY, sizeZ, detailX, detailY
+	ellipsoid(width / 2.5, height / 2.5, width / 2.5, 100, 100);
 
 	pop();
 }
 
+//TODO
 function drawOrbit() {
 	push();
     noStroke();
@@ -96,11 +75,11 @@ function drawOrbit() {
 
 	rotateX(-90);
     // orbital inclination of the ISS orbit = 51.6437 degrees
-    let offset = sin(longitude)*90;
+    let offset = sin(longitude)*45;
     // console.log(longitude, offset);
     rotateY(offset + 51.6437);
 	// use a torus to display the ISS's orbit
-	torus(350, 2, 50, 50);
+	torus(width / 3 + width / 20, 2, 50, 50);
 
     pop();
     
@@ -112,18 +91,19 @@ function drawISS() {
 	strokeWeight(1);
 	stroke(255);
 
-	translate(0, 0, 400);
+	translate(0, 0, width/2);
 
 	size = 10;
+	//TODO
 	box(size, size, size);
 	pop();
 }
 
-// loop
+// the draw() function gets called every frame (default framerate = 60)
 function draw() {
-    background(25);
+    background("#3A3880");
 	drawEarth();
-    drawOrbit();
+    //drawOrbit();
 	drawISS();
 }
 
