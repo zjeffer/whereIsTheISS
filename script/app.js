@@ -1,45 +1,69 @@
-let mapImage;
+let mapImage, ISSImage;
+
+// for css
+let css_maxwidth = 22 * 16; // 22rem * 16px
 
 let latitude = 0,
 	longitude = 0,
-	altitude = 0;
+	altitude = 0,
+	velocity = 0;
+
+let html_velocity, html_altitude;
 
 // before loading everything else
 function preload() {
 	// TODO: better map?
-    mapImage = loadImage("img/earth.png");
-    ISSImage = loadImage("img/iss.png");
+	mapImage = loadImage("img/earth.png");
+	ISSImage = loadImage("img/satellite.svg");
 }
 
 // setup canvas
 function setup() {
-	let canvas = createCanvas(22*16, 22*16, WEBGL);
-    canvas.parent("js-globe");
-    angleMode(DEGREES);
+	let canvas = createCanvas(css_maxwidth, css_maxwidth, WEBGL);
+	canvas.parent("js-globe");
+	angleMode(DEGREES);
+	image(ISSImage, -25, -25, 50, 50);
 
 	// get data from api
-    getISSData();
+	getISSData();
 }
-
 
 //p5js function that responds to window resizing
-function windowResized(){
-	resizeCanvas(22*16, 22*16);
+function windowResized() {
+	resizeCanvas(css_maxwidth, css_maxwidth);
 }
 
+const getDOMElements = function () {
+	html_velocity = document.querySelector(".js-velocity");
+	html_altitude = document.querySelector(".js-altitude");
+};
+
 function getISSData() {
-	$.getJSON("https://api.wheretheiss.at/v1/satellites/25544", function (data) {
+	fetch("https://api.wheretheiss.at/v1/satellites/25544")
+	.then(res => res.json())
+	.then(data => {
 		//console.log(data);
 		latitude = data["latitude"];
 		longitude = data["longitude"];
-		altitude = data["altitude"];
+		altitude = data["altitude"] * 1000; // data is in km, set to meters
+		velocity = data["velocity"] / 3.6; // data is in km/h, set to m/s
+
+		setVelocity();
+		setAltitude();
 	});
 	setTimeout(() => {
 		getISSData();
 	}, 2000);
 }
 
+function setVelocity() {
+	html_velocity.innerText = velocity.toFixed(2);
+}
 
+function setAltitude() {
+	html_altitude.innerText = altitude.toFixed(2);
+	
+}
 
 function drawEarth() {
 	push();
@@ -52,12 +76,11 @@ function drawEarth() {
 	// apply the map texture
 	texture(mapImage);
 
-
 	let circEquator = 40075;
 	let circMeridonial = 40007;
 	let ratio = circEquator / circMeridonial;
 
-    rotateX(-latitude);
+	rotateX(-latitude);
 	rotateY(180 - longitude);
 
 	// sizeX, sizeY, sizeZ, detailX, detailY
@@ -69,20 +92,19 @@ function drawEarth() {
 //TODO
 function drawOrbit() {
 	push();
-    noStroke();
-    fill(255);
-    lights(255);    
+	noStroke();
+	fill(255);
+	lights(255);
 
 	rotateX(-90);
-    // orbital inclination of the ISS orbit = 51.6437 degrees
-    let offset = sin(longitude)*45;
-    // console.log(longitude, offset);
-    rotateY(offset + 51.6437);
+	// orbital inclination of the ISS orbit = 51.6437 degrees
+	let offset = sin(longitude) * 45;
+	// console.log(longitude, offset);
+	rotateY(offset + 51.6437);
 	// use a torus to display the ISS's orbit
 	torus(width / 3 + width / 20, 2, 50, 50);
 
-    pop();
-    
+	pop();
 }
 
 function drawISS() {
@@ -91,7 +113,7 @@ function drawISS() {
 	strokeWeight(1);
 	stroke(255);
 
-	translate(0, 0, width/2);
+	translate(0, 0, width / 2);
 
 	size = 10;
 	//TODO
@@ -101,13 +123,13 @@ function drawISS() {
 
 // the draw() function gets called every frame (default framerate = 60)
 function draw() {
-    background("#3A3880");
-	drawEarth();
-    //drawOrbit();
-	drawISS();
+	background("#3A3880");
+	
+	//drawEarth();
+	image(ISSImage, -25, -25, 50, 50);
+	//drawOrbit();
+	//drawISS();
 }
-
-const getDOMElements = function () {};
 
 document.addEventListener("DOMContentLoaded", () => {
 	console.log("DOM Loaded");

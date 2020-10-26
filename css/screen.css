@@ -97,19 +97,38 @@ body {
     
 }
 
-.c-height {
-    position: absolute;
-    bottom: 40px;
-    width: 100%;
+.c-velocity {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 
+.c-velocity__icon {
+    animation-name: bounce;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {transform: translateY(3%);}
+    50% { transform: translateY(-3%);}
+}
+
+.c-velocity__text {
+    font-size: 1.5rem;
+
+}
+
+.c-height {
     font-size: 1.3rem;
+    
 }
 
 .c-height__icon {
-    height: 24px;
-    width: 24px;
-    margin: 0 auto;
     display: block;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .c-height__middle {
@@ -129,4 +148,22 @@ body {
 
 .c-height__curve {
     
+}
+
+
+.u-icon--sm {
+    width: 36px;
+    height: 36px;
+}
+
+
+.u-icon--md {
+    width: 80px;
+    height: 80px;
+}
+
+
+.u-icon--lg {
+    width: 120px;
+    height: 120px;
 }
