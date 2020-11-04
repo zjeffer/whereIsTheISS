@@ -1,0 +1,168 @@
+:root {
+	--color-alpha: #3a3880;
+	--color-beta: #c8d3ff;
+
+	--global-color-back: var(--color-alpha);
+	--global-color-front: #ffffff;
+}
+
+.dark-mode {
+	--global-color-back: var(--color-beta);
+	--global-color-front: var(--color-alpha);
+}
+
+html {
+	background-color: var(--global-color-back);
+	color: var(--global-color-front);
+	font-weight: 500;
+}
+
+
+::-moz-selection {
+	color: var(--global-color-back);
+	background-color: var(--global-color-front);
+	text-shadow: none;
+}
+
+::selection {
+	color: var(--global-color-back);
+	background-color: var(--global-color-front);
+	text-shadow: none;
+}
+
+#mapid {
+	margin: 0 auto;
+	height: 300px;
+}
+
+.o-grid-container {
+	display: grid;
+	grid-template-rows: auto auto auto;
+}
+
+.o-grid-item {
+	
+}
+
+.c-app {
+	max-width: 22rem;
+	margin: 0 auto;
+	height: 100vh;
+	position: relative;
+}
+
+.c-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 56px;
+	font-size: 1.5rem;
+
+	border-bottom: 2px solid var(--global-color-front);
+}
+
+.c-logo {
+	display: flex;
+	align-items: center;
+}
+
+.c-logo__svg {
+	height: 36px;
+	width: 36px;
+
+	margin-right: 16px;
+}
+
+.c-logo__title {
+	display: block;
+}
+
+.c-dark-mode-toggle {
+	display: flex;
+}
+
+.c-dark-mode-toggle__svg {
+	height: 24px;
+}
+
+.c-globe {
+}
+
+.c-velocity {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.c-velocity__icon {
+	animation-name: bounce;
+	animation-duration: 2s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: translateY(6px) rotate(45deg);
+	}
+	50% {
+		transform: translateY(-6px) rotate(45deg);
+	}
+}
+
+.c-velocity__text {
+	font-size: 1.5rem;
+}
+
+.c-height {
+	font-size: 1.3rem;
+	/* position: absolute;
+	bottom: 0; */
+	margin-bottom: 16px;
+}
+
+.c-height__icon {
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.c-height__middle {
+	display: flex;
+	/* TODO: better spacing method */
+	justify-content: space-evenly;
+	align-items: center;
+
+	width: 100%;
+	margin: 0 auto;
+}
+
+.c-arrow {
+	font-size: 2.4rem;
+	transform: rotate(90deg);
+}
+
+.c-height__curve {
+	display: block;
+	margin: 0;
+	width: 100%;
+	fill: none;
+	stroke: var(--global-color-front);
+	stroke-width: 4px;
+}
+
+.u-icon--sm {
+	width: 36px;
+	height: 36px;
+}
+
+.u-icon--md {
+	width: 80px;
+	height: 80px;
+}
+
+.u-icon--lg {
+	width: 120px;
+	height: 120px;
+}

@@ -1,0 +1,147 @@
+:root {
+	--color-alpha: #5255b2;
+	--color-beta: #3a3880;
+
+	--global-color-back: var(--color-alpha);
+	--global-color-front: #ffffff;
+}
+
+html {
+	background-color: var(--global-color-back);
+	color: var(--global-color-front);
+	font-size: 14px;
+}
+
+@media (min-width: 500px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+::-moz-selection {
+	color: var(--global-color-back);
+	background-color: var(--global-color-front);
+	text-shadow: none;
+}
+
+::selection {
+	color: var(--global-color-back);
+	background-color: var(--global-color-front);
+	text-shadow: none;
+}
+
+.o-grid-container {
+	display: grid;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 10px;
+}
+
+
+@media (min-width: 900px) {
+	/* on large screens: rows instead of columns */
+	.o-grid-container {
+		grid-template-columns: auto auto;
+        height: 100vh;
+        grid-gap: 0;
+        justify-content: center;
+        align-items: center;
+	}
+}
+
+.o-button-reset {
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	overflow: visible;
+	background: transparent;
+
+	/* inherit font & color from ancestor */
+	color: inherit;
+	font: inherit;
+
+	/* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+	line-height: normal;
+
+	/* Corrects font smoothing for webkit */
+	-webkit-font-smoothing: inherit;
+	-moz-osx-font-smoothing: inherit;
+
+	/* Corrects inability to style clickable `input` types in iOS */
+	-webkit-appearance: none;
+}
+
+.c-phone {
+    margin: 0 6rem;
+    display: grid;
+    justify-content: center;
+}
+
+.c-phone__image {
+    max-height: 70vh;
+}
+
+.c-form {
+	margin: 1rem auto;
+	width: 100%;
+	max-width: 24rem;
+}
+
+@media (min-width: 600px) {
+	.c-form {
+		margin: 0 3rem;
+		max-width: 30rem;
+	}
+}
+
+.c-header {
+	border-bottom: 1px solid var(--global-color-front);
+	display: flex;
+	align-items: center;
+}
+
+.c-header__icon {
+	height: 56px;
+	width: 56px;
+	margin-right: 24px;
+}
+
+.c-header__text {
+	font-size: 2rem;
+	font-weight: 400;
+}
+
+@media (min-width: 600px) {
+	.c-header__text {
+		font-size: 2.4rem;
+	}
+}
+
+.c-input {
+	width: 100%;
+	display: block;
+	font-size: 1.2rem;
+	border: none;
+
+	margin-bottom: 16px;
+	border-radius: 4px;
+	padding: 8px;
+}
+
+.c-button {
+	display: block;
+	margin: 0 auto;
+	background-color: var(--color-beta);
+	color: var(--global-color-front);
+	border-radius: 4px;
+	padding: 12px 24px;
+
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+.u-text-bold {
+	font-weight: bold;
+}

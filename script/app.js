@@ -28,7 +28,7 @@ function setup() {
 	getISSData();
 }
 
-//p5js function that responds to window resizing
+//p5js function that responds to window resizing => resize the canvas
 function windowResized() {
 	resizeCanvas(css_maxwidth, css_maxwidth);
 }
@@ -57,17 +57,19 @@ function getISSData() {
 }
 
 function setVelocity() {
+	// todo: space between thousands: 7 000 instead of 7000
 	html_velocity.innerText = velocity.toFixed(2);
 }
 
 function setAltitude() {
+	// todo: space between thousands: 400 000 instead of 400000
 	html_altitude.innerText = altitude.toFixed(2);
 	
 }
 
 function drawEarth() {
 	push();
-	// don't draw lines
+	// don't draw lines on the sphere
 	noStroke();
 
 	// add some ambient light for better graphics
@@ -76,6 +78,7 @@ function drawEarth() {
 	// apply the map texture
 	texture(mapImage);
 
+	//calculate the ratio; earth isn't a perfect sphere
 	let circEquator = 40075;
 	let circMeridonial = 40007;
 	let ratio = circEquator / circMeridonial;
@@ -108,30 +111,29 @@ function drawOrbit() {
 }
 
 function drawISS() {
+	// push and pop: https://p5js.org/reference/#/p5/push
 	push();
-	fill(0, 0, 200);
-	strokeWeight(1);
-	stroke(255);
-
+	// translate it with the z axis so its over the earth instead of behind it
 	translate(0, 0, width / 2);
 
-	size = 10;
-	//TODO
-	box(size, size, size);
+	size = 20;
+	image(ISSImage, -size / 2, -size / 2, size, size);
 	pop();
 }
 
 // the draw() function gets called every frame (default framerate = 60)
 function draw() {
+	// background of the square canvas: same as the page's background
 	background("#3A3880");
 	
-	//drawEarth();
-	image(ISSImage, -25, -25, 50, 50);
+	// create the earth according to the position of the ISS
+	drawEarth();
 	//drawOrbit();
-	//drawISS();
+	// draw the ISS image above the earth
+	drawISS();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("DOM Loaded");
+	//console.log("DOM Loaded");
 	getDOMElements();
 });
