@@ -73,7 +73,7 @@ html {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 56px;
+	height: 3.5rem; /* 3.5 * 16px = 56px */
 	font-size: 1.5rem;
 
 	border-bottom: 2px solid var(--global-color-front);
@@ -141,8 +141,7 @@ html {
 	border-radius: 50%;
 }
 
-/*  */
-
+/* The canvas element with earth and ISS */
 .c-globe {
 }
 

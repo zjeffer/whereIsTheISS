@@ -10,9 +10,7 @@ let mapImage, ISSImage;
 let css_maxwidth = 22 * 16; // 22rem * 16px
 
 let latitude = 0,
-	longitude = 0,
-	altitude = 0,
-	velocity = 0;
+	longitude = 0;
 
 let html_velocity, html_altitude;
 
@@ -20,7 +18,7 @@ let html_velocity, html_altitude;
 function preload() {
 	// TODO: better map?
 	mapImage = loadImage("img/earth.png");
-	ISSImage = loadImage("img/satellite.svg");
+	ISSImage = loadImage("img/satellite-dark.svg");
 }
 
 // setup canvas
@@ -28,6 +26,7 @@ function setup() {
 	let canvas = createCanvas(css_maxwidth, css_maxwidth, WEBGL);
 	canvas.parent("js-globe");
 	angleMode(DEGREES);
+	// draw the iss image: image(element, posX of top-left corner, posY of top-left corner, sizeX, sizeY)
 	image(ISSImage, -25, -25, 50, 50);
 
 	// get data from api
@@ -40,9 +39,12 @@ function setup() {
 
 //p5js function that responds to window resizing => resize the canvas
 function windowResized() {
-	resizeCanvas(css_maxwidth, css_maxwidth);
+	// if the window width is smaller than css_maxwidth (22rem), resize the canvas to the width of the viewport
+	let w = css_maxwidth > windowWidth ? windowWidth : css_maxwidth;
+	resizeCanvas(w, w);
 }
 
+// get the DOM elements
 const getDOMElements = function () {
 	html_velocity = document.querySelector(".js-velocity");
 	html_altitude = document.querySelector(".js-altitude");
@@ -58,25 +60,27 @@ function getISSData() {
 		altitude = data["altitude"] * 1000; // data is in km, set to meters
 		velocity = data["velocity"] / 3.6; // data is in km/h, set to m/s
 
-		setVelocity();
-		setAltitude();
+		setAltitude(altitude);
+		setVelocity(velocity);
 	});
 	setTimeout(() => {
 		getISSData();
 	}, 2000);
 }
 
-function setVelocity() {
+// set the velocity html element to the current velocity
+function setVelocity(velocity) {
 	// todo: space between thousands: 7 000 instead of 7000
 	html_velocity.innerText = velocity.toFixed(2);
 }
 
-function setAltitude() {
+// set the altitude html element to the current altitude
+function setAltitude(altitude) {
 	// todo: space between thousands: 400 000 instead of 400000
 	html_altitude.innerText = altitude.toFixed(2);
-	
 }
 
+// draw the earth, rotated so the ISS is above the current location
 function drawEarth() {
 	push();
 	// don't draw lines on the sphere
@@ -88,14 +92,11 @@ function drawEarth() {
 	// apply the map texture
 	texture(mapImage);
 
-	//calculate the ratio; earth isn't a perfect sphere
-	let circEquator = 40075;
-	let circMeridonial = 40007;
-	let ratio = circEquator / circMeridonial;
-
 	rotateX(-latitude);
 	rotateY(180 - longitude);
 
+	// width and height are builtin p5js variables: they refer to the width and height of the canvas
+	// this is dynamically updated using the windowResized() function
 	// sizeX, sizeY, sizeZ, detailX, detailY
 	ellipsoid(width / 2.5, height / 2.5, width / 2.5, 100, 100);
 
@@ -120,6 +121,7 @@ function drawOrbit() {
 	pop();
 }
 
+// show the ISS image above the globe object
 function drawISS() {
 	// push and pop: https://p5js.org/reference/#/p5/push
 	push();
@@ -133,12 +135,9 @@ function drawISS() {
 
 // the draw() function gets called every frame (default framerate = 60)
 function draw() {
-	// background of the square canvas: same as the page's background
-	if (darkmode){
-		background(color_alpha);
-	} else {
-		background(color_beta);
-	}
+	// background of the square canvas element: transparent
+	clear();
+	
 	
 	
 	// create the earth according to the position of the ISS
