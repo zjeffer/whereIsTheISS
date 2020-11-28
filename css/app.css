@@ -1,8 +1,8 @@
 :root {
 	/* Base colors */
-	--color-alpha: #1f1f4d;
-	--color-beta: #c8d3ff;
-	--color-gamma: #5255b2;
+	--color-alpha: #28307c;
+	--color-beta: #98b6fd;
+	--color-gamma: #5255B2;
 	--color-delta: #ffe985;
 
 	--color-white: #ffffff;
@@ -14,6 +14,10 @@
 	/* Back and front colors */
 	--global-color-back: var(--color-beta);
 	--global-color-front: var(--color-alpha);
+
+	/* Sizes */
+	--global-header-height: 3.5rem; /* 3.5 * 16px = 56px */
+	--global-darkmode-icon-size: 2rem;
 }
 
 /* Changes the back and front colors if the html element has this class */
@@ -45,6 +49,24 @@ html {
 	text-shadow: none;
 }
 
+
+/*
+    Object: Hide accessible
+    ---
+    Accessibly hide any element
+*/
+
+.o-hide-accessible {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
 /* 
 	Component: App
 
@@ -73,10 +95,16 @@ html {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 3.5rem; /* 3.5 * 16px = 56px */
+	height: var(--global-header-height);
 	font-size: 1.5rem;
 
 	border-bottom: 2px solid var(--global-color-front);
+}
+
+@media screen and (max-width: 22rem){
+	.c-header {
+		font-size: 1.2rem;
+	}
 }
 
 /* 
@@ -109,26 +137,63 @@ html {
 
 
 .c-darkmode {
-	position: relative;
+	
 }
 
-.c-darkmode__buttons {
-	position: absolute;
-	right: 0;
+.c-darkmode__input {
 	top: 0;
-	height: 80px; 
+	right: 0;
+	transition: all 2s ease-out;
 }
 
 .c-darkmode__fake-input {
+	height: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
 	position: absolute;
-	/* display: none; */
-	height: 32px;
-	width: 32px;
+	right: 0;
+	/* position */
+	top: calc((var(--global-header-height) / 2) - 1rem);
+
+	transform: rotate(0deg);
+	transition: transform 0.4s ease-out;
 }
 
+.c-darkmode__input:checked + .c-darkmode__fake-input {
+	transform: rotate(180deg);
+}
+
+/* transition for opacity */
 .c-darkmode__icon {
-	height: 32px;
-	width: 32px;
+	transition: opacity 0.4s cubic-bezier(0, 50, 100);
+}
+
+/* When in lightmode: opacity of sun element == 0 */
+.c-darkmode__input + .c-darkmode__fake-input .c-darkmode__sun {
+	opacity: 0;
+}
+
+/* When in darkmode: opacity of moon element == 1 */
+.c-darkmode__input + .c-darkmode__fake-input .c-darkmode__moon {
+	opacity: 1;
+}
+
+/* When in darkmode: opacity of moon element == 0 */
+.c-darkmode__input:checked + .c-darkmode__fake-input .c-darkmode__moon {
+	opacity: 0;
+}
+
+/* When in darkmode: opacity of sun element == 1 */
+.c-darkmode__input:checked + .c-darkmode__fake-input .c-darkmode__sun {
+	opacity: 1;
+}
+
+
+.c-darkmode__icon {
+	height: var(--global-darkmode-icon-size);
+	width: var(--global-darkmode-icon-size);
 }
 
 .c-darkmode__moon {
@@ -188,7 +253,7 @@ html {
 
 .c-height {
 	font-size: 1.3rem;
-	margin-bottom: 16px;
+	margin-bottom: 1rem;
 }
 
 .c-height__icon {
@@ -213,7 +278,6 @@ html {
 }
 
 .c-height__curve {
-	
 	display: block;
 	margin: 0;
 	width: 100%;
@@ -229,16 +293,16 @@ html {
 */
 
 .u-icon--sm {
-	width: 36px;
-	height: 36px;
+	width: 2rem;
+	height: 2rem;
 }
 
 .u-icon--md {
-	width: 80px;
-	height: 80px;
+	width: 5rem;
+	height: 5rem;
 }
 
 .u-icon--lg {
-	width: 120px;
-	height: 120px;
+	width: 7.5rem;
+	height: 7.5rem;
 }

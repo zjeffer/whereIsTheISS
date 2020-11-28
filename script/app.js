@@ -1,10 +1,10 @@
-let color_alpha = "#1f1f4d";
-let color_beta = "#c8d3ff";
-let color_gamma = " #5255b2";
+let color_alpha = "#28307c";
+let color_beta = "#98b6fd";
+let color_gamma = " #353762";
 
 let darkmode = false;
 
-let mapImage, ISSImage;
+let mapImage, ISSImage, ISSImageDark;
 
 // for css
 let css_maxwidth = 22 * 16; // 22rem * 16px
@@ -12,29 +12,27 @@ let css_maxwidth = 22 * 16; // 22rem * 16px
 let latitude = 0,
 	longitude = 0;
 
-let html_velocity, html_altitude;
+let html_velocity, html_altitude, html_darkmode_sun, html_darkmode_moon, html_darkmode;
 
 // before loading everything else
 function preload() {
 	// TODO: better map?
 	mapImage = loadImage("img/earth.png");
 	ISSImage = loadImage("img/satellite-dark.svg");
+	ISSImageDark = loadImage("img/satellite.svg");
 }
 
-// setup canvas
+// setup: loads after preload()
 function setup() {
+	getDOMElements();
 	let canvas = createCanvas(css_maxwidth, css_maxwidth, WEBGL);
 	canvas.parent("js-globe");
-	angleMode(DEGREES);
-	// draw the iss image: image(element, posX of top-left corner, posY of top-left corner, sizeX, sizeY)
-	image(ISSImage, -25, -25, 50, 50);
+	angleMode(DEGREES);	
 
 	// get data from api
 	getISSData();
 
-	if(darkmode){
-		
-	}
+	
 }
 
 //p5js function that responds to window resizing => resize the canvas
@@ -46,9 +44,29 @@ function windowResized() {
 
 // get the DOM elements
 const getDOMElements = function () {
+	root = document.querySelector("html");
 	html_velocity = document.querySelector(".js-velocity");
 	html_altitude = document.querySelector(".js-altitude");
+	html_darkmode_sun = document.querySelector(".js-darkmode-sun");
+	html_darkmode_moon = document.querySelector(".js-darkmode-moon");
+	html_darkmode = document.querySelector(".js-darkmode");
+
+	// uncheck checkbox when DOM loaded
+	html_darkmode.checked = false;
+	// and set it to lightmode by default
+	toggleDarkMode(html_darkmode);
+	// on changes: call toggleDarkMode()
+	html_darkmode.addEventListener("change", () => toggleDarkMode(html_darkmode));
 };
+
+function toggleDarkMode(checkbox) {
+	if(checkbox.checked){
+		root.classList.add("dark-mode");
+	} else {
+		root.classList.remove("dark-mode");
+	}
+	darkmode = checkbox.checked;
+}
 
 function getISSData() {
 	fetch("https://api.wheretheiss.at/v1/satellites/25544")
@@ -125,11 +143,14 @@ function drawOrbit() {
 function drawISS() {
 	// push and pop: https://p5js.org/reference/#/p5/push
 	push();
-	// translate it with the z axis so its over the earth instead of behind it
+	// translate it along the z axis so its above the earth instead of behind it
 	translate(0, 0, width / 2);
 
-	size = 20;
+	// set the size for the ISS image
+	let size = 20;
+	// draw the iss image: image(element, posX of top-left corner, posY of top-left corner, sizeX, sizeY)
 	image(ISSImage, -size / 2, -size / 2, size, size);
+	
 	pop();
 }
 
@@ -149,5 +170,5 @@ function draw() {
 
 document.addEventListener("DOMContentLoaded", () => {
 	//console.log("DOM Loaded");
-	getDOMElements();
+	
 });

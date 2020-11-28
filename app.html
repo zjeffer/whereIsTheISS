@@ -38,12 +38,10 @@
                 </div>
             </div>
             <div class="c-darkmode">
-                <div class="c-darkmode__fake-input"></div>
-                <div class="c-darkmode__buttons">
-                    <div class="c-darkmode__icon c-darkmode__sun">
-                    
-                    </div>
-                    <svg class=" c-darkmode__icon c-darkmode__moon" xmlns="http://www.w3.org/2000/svg" width="28.687" height="32"
+                <input type="checkbox" class="c-darkmode__input o-hide-accessible js-darkmode" id="darkmode-input">
+                <label class="c-darkmode__fake-input" for="darkmode-input">
+                    <svg class=" c-darkmode__icon c-darkmode__moon js-darkmode-moon" xmlns="http://www.w3.org/2000/svg" width="28.687"
+                         height="32"
                          viewBox="0 0 28.687 32">
                         <g id="Moon_and_star" data-name="Moon and star" transform="translate(-346 -61)">
                             <path id="Star"
@@ -54,7 +52,11 @@
                                   transform="translate(219.043 -171.436)" fill="#fff" />
                         </g>
                     </svg>
-                </div>
+                    <div class="c-darkmode__icon c-darkmode__sun  js-darkmode-sun">
+                    
+                    </div>
+                    
+                </label>
             </div>
         </div>
         <div class="c-globe o-grid-item" id="js-globe"></div>
