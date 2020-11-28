@@ -1,8 +1,16 @@
+// colors
 let color_alpha = "#28307c";
 let color_beta = "#98b6fd";
-let color_gamma = " #353762";
+let color_gamma = "#353762";
+let color_delta = "#284268";
+let color_white = "#ffffff";
 
+// darkmode vars
 let darkmode = false;
+let rotations = 0;
+// to change the colors in the logo's svg when in darkmode
+let logo_svg_group1;
+let logo_svg_group2;
 
 let mapImage, ISSImage, ISSImageDark;
 
@@ -12,7 +20,7 @@ let css_maxwidth = 22 * 16; // 22rem * 16px
 let latitude = 0,
 	longitude = 0;
 
-let html_velocity, html_altitude, html_darkmode_sun, html_darkmode_moon, html_darkmode;
+let html_velocity, html_altitude, html_darkmode_sun, html_darkmode_moon, html_darkmode, html_darkmode_input;
 
 // before loading everything else
 function preload() {
@@ -50,6 +58,13 @@ const getDOMElements = function () {
 	html_darkmode_sun = document.querySelector(".js-darkmode-sun");
 	html_darkmode_moon = document.querySelector(".js-darkmode-moon");
 	html_darkmode = document.querySelector(".js-darkmode");
+	html_darkmode_input = document.querySelector(".js-darkmode-input");
+
+	logo_svg_group1 = document.querySelectorAll(".svg_g1");
+	logo_svg_group2 = document.querySelectorAll(".svg_g2");
+
+	console.log(logo_svg_group1);
+	console.log(logo_svg_group2);
 
 	// uncheck checkbox when DOM loaded
 	html_darkmode.checked = false;
@@ -59,13 +74,29 @@ const getDOMElements = function () {
 	html_darkmode.addEventListener("change", () => toggleDarkMode(html_darkmode));
 };
 
+// toggle darkmode
 function toggleDarkMode(checkbox) {
+	// if checkbox checked: darkmode enabled
 	if(checkbox.checked){
 		root.classList.add("dark-mode");
+		for(let x of logo_svg_group1){
+			x.style.fill = color_white;
+		}
+		for(let x of logo_svg_group2){
+			x.style.fill = color_delta;
+		}
 	} else {
 		root.classList.remove("dark-mode");
+		for (let x of logo_svg_group1) {
+			x.style.fill = color_alpha;
+		}
+		for (let x of logo_svg_group2) {
+			x.style.fill = color_alpha;
+		}
 	}
 	darkmode = checkbox.checked;
+	html_darkmode_input.style.transform = `rotate(${180*rotations}deg)`;
+	rotations++;
 }
 
 function getISSData() {

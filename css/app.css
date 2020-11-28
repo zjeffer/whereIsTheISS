@@ -167,7 +167,7 @@ html {
 
 /* transition for opacity */
 .c-darkmode__icon {
-	transition: opacity 0.4s cubic-bezier(0, 50, 100);
+	transition: opacity 0.4s ease-out;
 }
 
 /* When in lightmode: opacity of sun element == 0 */
