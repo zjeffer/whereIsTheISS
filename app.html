@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 
 <head>
     <meta charset="UTF-8">
@@ -10,14 +10,13 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-            crossorigin=""></script>
 
     <!-- p5js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"
             integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA=="
             crossorigin="anonymous"></script>
+
+    <!-- app.js script -->
     <script src="script/app.js"></script>
 
     <!-- Fonts -->
@@ -38,14 +37,28 @@
                     Where is the ISS?
                 </div>
             </div>
-            <div class="c-dark-mode-toggle">
-
+            <div class="c-darkmode">
+                <div class="c-darkmode__fake-input"></div>
+                <div class="c-darkmode__buttons">
+                    <div class="c-darkmode__icon c-darkmode__sun">
+                    
+                    </div>
+                    <svg class=" c-darkmode__icon c-darkmode__moon" xmlns="http://www.w3.org/2000/svg" width="28.687" height="32"
+                         viewBox="0 0 28.687 32">
+                        <g id="Moon_and_star" data-name="Moon and star" transform="translate(-346 -61)">
+                            <path id="Star"
+                                  d="M4,0l.69,2.739L7.208,1.584,5.55,3.846,8,5.145l-2.757.08L5.78,8,4,5.839,2.22,8l.537-2.775L0,5.145l2.45-1.3L.792,1.584,3.31,2.739Z"
+                                  transform="translate(355.5 90) rotate(180)" fill="#fff" />
+                            <path id="Moon"
+                                  d="M128.6,237.785a18.177,18.177,0,0,1,16.077,26.651,16.473,16.473,0,1,0-17.717-26.577C127.5,237.811,128.044,237.785,128.6,237.785Z"
+                                  transform="translate(219.043 -171.436)" fill="#fff" />
+                        </g>
+                    </svg>
+                </div>
             </div>
         </div>
         <div class="o-grid-container">
-            <div class="c-globe o-grid-item" id="js-globe">
-            
-            </div>
+            <div class="c-globe o-grid-item" id="js-globe"></div>
             <div class="c-velocity o-grid-item">
                 <div class="c-velocity__icon">
                     <img class="u-icon--lg" src="img/satellite.svg" alt="Sattellite icon">
@@ -75,7 +88,6 @@
                 </svg>
             </div>
         </div>
-        
     </main>
 </body>
 

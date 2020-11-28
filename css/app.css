@@ -1,15 +1,27 @@
 :root {
-	--color-alpha: #3a3880;
+	/* Base colors */
+	--color-alpha: #1f1f4d;
 	--color-beta: #c8d3ff;
+	--color-gamma: #5255b2;
+	--color-delta: #ffe985;
 
-	--global-color-back: var(--color-alpha);
-	--global-color-front: #ffffff;
-}
+	--color-white: #ffffff;
 
-.dark-mode {
+	/* Dark mode icons */
+	--color-sun: var(--color-delta);
+	--color-moon: var(--color-white);
+
+	/* Back and front colors */
 	--global-color-back: var(--color-beta);
 	--global-color-front: var(--color-alpha);
 }
+
+/* Changes the back and front colors if the html element has this class */
+.dark-mode {
+	--global-color-back: var(--color-alpha);
+	--global-color-front: var(--color-white);
+}
+
 
 html {
 	background-color: var(--global-color-back);
@@ -17,6 +29,9 @@ html {
 	font-weight: 500;
 }
 
+/* 
+	Text selection
+*/
 
 ::-moz-selection {
 	color: var(--global-color-back);
@@ -30,10 +45,7 @@ html {
 	text-shadow: none;
 }
 
-#mapid {
-	margin: 0 auto;
-	height: 300px;
-}
+/* Grid definitions */
 
 .o-grid-container {
 	display: grid;
@@ -44,6 +56,12 @@ html {
 	
 }
 
+/* 
+	Component: App
+
+	The <main> element
+*/
+
 .c-app {
 	max-width: 22rem;
 	margin: 0 auto;
@@ -51,7 +69,14 @@ html {
 	position: relative;
 }
 
+/* 
+	Component: Header
+
+	The header with title, logo and dark mode toggle
+*/
+
 .c-header {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -60,6 +85,12 @@ html {
 
 	border-bottom: 2px solid var(--global-color-front);
 }
+
+/* 
+	Component: Logo
+
+	The sattelite icon in the header
+*/
 
 .c-logo {
 	display: flex;
@@ -77,16 +108,56 @@ html {
 	display: block;
 }
 
-.c-dark-mode-toggle {
-	display: flex;
+/* 
+	Component: Dark mode toggle
+
+	The button to toggle dark mode
+*/
+
+
+.c-darkmode {
+	position: relative;
 }
 
-.c-dark-mode-toggle__svg {
-	height: 24px;
+.c-darkmode__buttons {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 80px; 
 }
+
+.c-darkmode__fake-input {
+	position: absolute;
+	/* display: none; */
+	height: 32px;
+	width: 32px;
+}
+
+.c-darkmode__icon {
+	height: 32px;
+	width: 32px;
+}
+
+.c-darkmode__moon {
+	fill: var(--color-moon);
+	transform: rotate(180deg);
+}
+
+.c-darkmode__sun {
+	background-color: var(--color-sun);
+	border-radius: 50%;
+}
+
+/*  */
 
 .c-globe {
 }
+
+/* 
+	Component: Velocity
+
+	Shows the current velocity of the ISS.
+*/
 
 .c-velocity {
 	display: flex;
@@ -100,6 +171,8 @@ html {
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 }
+
+/* the animation that makes the sattelite bounce */
 
 @keyframes bounce {
 	0%,
@@ -115,10 +188,16 @@ html {
 	font-size: 1.5rem;
 }
 
+/* 
+	Component: Height
+
+	Shows the current height of the ISS.
+*/
+
 .c-height {
 	font-size: 1.3rem;
-	/* position: absolute;
-	bottom: 0; */
+	position: absolute;
+	bottom: 0;
 	margin-bottom: 16px;
 }
 
@@ -144,6 +223,7 @@ html {
 }
 
 .c-height__curve {
+	
 	display: block;
 	margin: 0;
 	width: 100%;
@@ -151,6 +231,12 @@ html {
 	stroke: var(--global-color-front);
 	stroke-width: 4px;
 }
+
+/* 
+	
+	Utilities
+
+*/
 
 .u-icon--sm {
 	width: 36px;

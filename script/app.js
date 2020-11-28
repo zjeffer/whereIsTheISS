@@ -1,3 +1,9 @@
+let color_alpha = "#1f1f4d";
+let color_beta = "#c8d3ff";
+let color_gamma = " #5255b2";
+
+let darkmode = false;
+
 let mapImage, ISSImage;
 
 // for css
@@ -26,6 +32,10 @@ function setup() {
 
 	// get data from api
 	getISSData();
+
+	if(darkmode){
+		
+	}
 }
 
 //p5js function that responds to window resizing => resize the canvas
@@ -124,7 +134,12 @@ function drawISS() {
 // the draw() function gets called every frame (default framerate = 60)
 function draw() {
 	// background of the square canvas: same as the page's background
-	background("#3A3880");
+	if (darkmode){
+		background(color_alpha);
+	} else {
+		background(color_beta);
+	}
+	
 	
 	// create the earth according to the position of the ISS
 	drawEarth();

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28.687" height="32" viewBox="0 0 28.687 32">
+  <g id="Moon_and_star" data-name="Moon and star" transform="translate(-346 -61)">
+    <path id="Star" d="M4,0l.69,2.739L7.208,1.584,5.55,3.846,8,5.145l-2.757.08L5.78,8,4,5.839,2.22,8l.537-2.775L0,5.145l2.45-1.3L.792,1.584,3.31,2.739Z" transform="translate(355.5 90) rotate(180)" fill="#fff"/>
+    <path id="Moon" d="M128.6,237.785a18.177,18.177,0,0,1,16.077,26.651,16.473,16.473,0,1,0-17.717-26.577C127.5,237.811,128.044,237.785,128.6,237.785Z" transform="translate(219.043 -171.436)" fill="#fff"/>
+  </g>
+</svg>
