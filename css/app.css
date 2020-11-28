@@ -45,17 +45,6 @@ html {
 	text-shadow: none;
 }
 
-/* Grid definitions */
-
-.o-grid-container {
-	display: grid;
-	grid-template-rows: auto auto auto;
-}
-
-.o-grid-item {
-	
-}
-
 /* 
 	Component: App
 
@@ -67,6 +56,10 @@ html {
 	margin: 0 auto;
 	height: 100vh;
 	position: relative;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 /* 
@@ -196,8 +189,6 @@ html {
 
 .c-height {
 	font-size: 1.3rem;
-	position: absolute;
-	bottom: 0;
 	margin-bottom: 16px;
 }
 
