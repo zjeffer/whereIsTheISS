@@ -60,8 +60,8 @@ const getDOMElements = function () {
 	html_darkmode = document.querySelector(".js-darkmode");
 	html_darkmode_input = document.querySelector(".js-darkmode-input");
 
-	logo_svg_group1 = document.querySelectorAll(".svg_g1");
-	logo_svg_group2 = document.querySelectorAll(".svg_g2");
+	logo_svg_group1 = document.querySelector(".svg_g1");
+	logo_svg_group2 = document.querySelector(".svg_g2");
 
 	console.log(logo_svg_group1);
 	console.log(logo_svg_group2);
@@ -79,20 +79,12 @@ function toggleDarkMode(checkbox) {
 	// if checkbox checked: darkmode enabled
 	if(checkbox.checked){
 		root.classList.add("dark-mode");
-		for(let x of logo_svg_group1){
-			x.style.fill = color_white;
-		}
-		for(let x of logo_svg_group2){
-			x.style.fill = color_delta;
-		}
+		logo_svg_group1.style.fill = color_white;
+		logo_svg_group2.style.fill = color_delta;
 	} else {
 		root.classList.remove("dark-mode");
-		for (let x of logo_svg_group1) {
-			x.style.fill = color_alpha;
-		}
-		for (let x of logo_svg_group2) {
-			x.style.fill = color_alpha;
-		}
+		logo_svg_group1.style.fill = color_alpha;
+		logo_svg_group2.style.fill = color_alpha;
 	}
 	darkmode = checkbox.checked;
 	html_darkmode_input.style.transform = `rotate(${180*rotations}deg)`;
