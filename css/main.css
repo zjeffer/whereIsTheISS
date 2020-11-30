@@ -1,3 +1,17 @@
+:root {
+	/* Base colors */
+	--color-alpha: #28307c;
+	--color-beta: #98b6fd;
+	--color-gamma: #5255B2;
+	--color-delta: #ffe985;
+
+	--color-white: #ffffff;
+
+	/* Whitespace */
+	--global-baseline: 4px;
+	--global-whitespace-xs: calc(var(--global-baseline) * 2);
+}
+
 * {
 	box-sizing: border-box;
 }

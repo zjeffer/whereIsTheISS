@@ -1,9 +1,10 @@
 :root {
 	--color-alpha: #5255b2;
 	--color-beta: #3a3880;
+	--color-white: #ffffff;
 
 	--global-color-back: var(--color-alpha);
-	--global-color-front: #ffffff;
+	--global-color-front: var(--color-white);
 }
 
 html {
@@ -120,14 +121,22 @@ html {
 }
 
 .c-input {
+	all: unset;
+	background-color: var(--color-white);
+	color: var(--global-color-back);
 	width: 100%;
 	display: block;
 	font-size: 1.2rem;
+	font-family: inherit;	
 	border: none;
 
 	margin-bottom: 16px;
 	border-radius: 4px;
 	padding: 8px;
+}
+
+.c-input::placeholder {
+	color: var(--global-color-back);
 }
 
 .c-button {
