@@ -1,5 +1,6 @@
 :root {
-	--color-landing: var(--color-gamma);
+	--global-color-back: var(--color-gamma);
+	--global-color-front: var(--color-white);
 
 	/* Sizes */
 	
@@ -7,7 +8,7 @@
 }
 
 html {
-	background-color: var(--color-landing);
+	background-color: var(--global-color-back);
 	color: var(--global-color-front);
 }
 
@@ -140,7 +141,7 @@ html {
 .c-button {
 	display: block;
 	margin: 0 auto;
-	background-color: var(--color-beta);
+	background-color: var(--color-alpha);
 	color: var(--global-color-front);
 	border-radius: var(--global-borderRadius);
 	padding: var(--global-whitespace-xs) var(--global-whitespace-sm);
