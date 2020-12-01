@@ -4,12 +4,20 @@
 	--color-beta: #98b6fd;
 	--color-gamma: #5255B2;
 	--color-delta: #ffe985;
+	--color-epsilon: #1f1f4d;
 
 	--color-white: #ffffff;
+	
 
 	/* Whitespace */
-	--global-baseline: 4px;
-	--global-whitespace-xs: calc(var(--global-baseline) * 2);
+	--global-baseline: 8px;
+	--global-whitespace-xs: calc(var(--global-baseline) * 2); /* 2 * 8px = 16px */
+	--global-whitespace-sm: calc(var(--global-baseline) * 3); /* 3 * 8px = 24px */
+	--global-whitespace-md: calc(var(--global-baseline) * 4); /* 4 * 8px = 32px */
+	--global-whitespace-lg: calc(var(--global-baseline) * 5); /* 5 * 8px = 40px */
+	--global-whitespace-xl: calc(var(--global-baseline) * 6); /* 6 * 8px = 48px */
+
+	--global-borderRadius: 4px;
 }
 
 * {
@@ -18,7 +26,7 @@
 
 html {
 	font-family: Roboto, Helvetica, Arial, sans-serif;
-	font-size: 16px;
+	font-size: 100%; /* 1rem == 16px */ 
 	line-height: 1.5;
 }
 

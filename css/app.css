@@ -13,12 +13,6 @@
 	--global-darkmode-button-size: calc(var(--global-darkmode-icon-size) * 2 + 16px);  /* = 64px + 16px margin = 80px */
 }
 
-@media screen and (min-width: 22rem){
-	:root {
-		
-	}
-}
-
 /* Changes the back and front colors if the html element has this class */
 .dark-mode {
 	--global-color-back: var(--color-alpha);

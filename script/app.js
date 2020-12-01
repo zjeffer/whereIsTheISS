@@ -1,9 +1,11 @@
 // colors
 let color_alpha = "#28307c";
 let color_beta = "#98b6fd";
-let color_gamma = "#353762";
-let color_delta = "#284268";
+let color_gamma = "#5255B2";
+let color_epsilon = "#1f1f4d";
+
 let color_white = "#ffffff";
+
 
 // darkmode vars
 let darkmode = false;
@@ -12,7 +14,7 @@ let rotations = 0;
 let logo_svg_group1;
 let logo_svg_group2;
 
-let mapImage, ISSImage, ISSImageDark;
+let mapImage, ISSImage;
 
 // for css
 let css_maxwidth = 22 * 16; // 22rem * 16px
@@ -26,8 +28,7 @@ let html_velocity, html_altitude, html_darkmode_sun, html_darkmode_moon, html_da
 function preload() {
 	// TODO: better map?
 	mapImage = loadImage("img/earth.png");
-	ISSImage = loadImage("img/satellite-dark.svg");
-	ISSImageDark = loadImage("img/satellite.svg");
+	ISSImage = loadImage("img/satellite.svg");
 }
 
 // setup: loads after preload()
@@ -80,11 +81,11 @@ function toggleDarkMode(checkbox) {
 	if(checkbox.checked){
 		root.classList.add("dark-mode");
 		logo_svg_group1.style.fill = color_white;
-		logo_svg_group2.style.fill = color_delta;
+		logo_svg_group2.style.fill = color_epsilon;
 	} else {
 		root.classList.remove("dark-mode");
-		logo_svg_group1.style.fill = color_alpha;
-		logo_svg_group2.style.fill = color_alpha;
+		logo_svg_group1.style.fill = color_epsilon;
+		logo_svg_group2.style.fill = color_epsilon;
 	}
 	darkmode = checkbox.checked;
 	html_darkmode_input.style.transform = `rotate(${180*rotations}deg)`;
