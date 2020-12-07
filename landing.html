@@ -8,6 +8,8 @@
 
       <link rel="stylesheet" href="css/main.css">
       <link rel="stylesheet" href="css/landing.css">
+
+      <script src="script/landing.js"></script>
 </head>
 
 <body>
@@ -95,10 +97,11 @@
                               <span class="u-text-bold">Sign up</span> to our waiting list to get updates.
                         </p>
                         <!-- TODO: form validation -->
-                        <div class="c-form__signup">
-                              <input class="c-input" type="text" placeholder="john.doe@gmail.com">
-                              <input class="o-button-reset c-button" type="submit" value="Join our mailing list">
-                        </div>
+                        <form class="c-form__signup" action="#">
+                              <input class="c-input js-email-input" type="text" placeholder="john.doe@gmail.com">
+                              <button class="o-button-reset c-button js-submit-button">Join our mailing list</button>
+                              <span class="c-errorlabel js-error-label"></span>
+                        </form>
                   </form>
             </div>
             <div class="o-grid-item">

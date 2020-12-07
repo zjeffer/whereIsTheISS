@@ -11,7 +11,7 @@ let color_white = "#ffffff";
 let darkmode = false;
 let rotations = 0;
 // to change the colors in the logo's svg when in darkmode
-let logo_svg_group1;
+let logo_svg;
 let logo_svg_group2;
 
 let mapImage, ISSImage;
@@ -61,11 +61,7 @@ const getDOMElements = function () {
 	html_darkmode = document.querySelector(".js-darkmode");
 	html_darkmode_input = document.querySelector(".js-darkmode-input");
 
-	logo_svg_group1 = document.querySelector(".svg_g1");
-	logo_svg_group2 = document.querySelector(".svg_g2");
-
-	console.log(logo_svg_group1);
-	console.log(logo_svg_group2);
+	logo_svg = document.querySelector(".svg_group");
 
 	// uncheck checkbox when DOM loaded
 	html_darkmode.checked = false;
@@ -80,12 +76,10 @@ function toggleDarkMode(checkbox) {
 	// if checkbox checked: darkmode enabled
 	if(checkbox.checked){
 		root.classList.add("dark-mode");
-		logo_svg_group1.style.fill = color_white;
-		logo_svg_group2.style.fill = color_epsilon;
+		logo_svg.style.fill = color_white;
 	} else {
 		root.classList.remove("dark-mode");
-		logo_svg_group1.style.fill = color_epsilon;
-		logo_svg_group2.style.fill = color_epsilon;
+		logo_svg.style.fill = color_epsilon;
 	}
 	darkmode = checkbox.checked;
 	html_darkmode_input.style.transform = `rotate(${180*rotations}deg)`;
@@ -96,7 +90,6 @@ function getISSData() {
 	fetch("https://api.wheretheiss.at/v1/satellites/25544")
 	.then(res => res.json())
 	.then(data => {
-		//console.log(data);
 		latitude = data["latitude"];
 		longitude = data["longitude"];
 		altitude = data["altitude"] * 1000; // data is in km, set to meters
@@ -155,7 +148,6 @@ function drawOrbit() {
 	rotateX(-90);
 	// orbital inclination of the ISS orbit = 51.6437 degrees
 	let offset = sin(longitude) * 45;
-	// console.log(longitude, offset);
 	rotateY(offset + 51.6437);
 	// use a torus to display the ISS's orbit
 	torus(width / 3 + width / 20, 2, 50, 50);
@@ -193,6 +185,5 @@ function draw() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-	//console.log("DOM Loaded");
-	
+	console.info("Made by Tuur Vanhoutte for Interaction Design project");
 });

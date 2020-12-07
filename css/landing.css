@@ -3,12 +3,11 @@
 	--global-color-front: var(--color-white);
 
 	/* Sizes */
-	
 	--logo-size: 3.5rem; /* 3.5 * 16px = 56px */
 }
 
 html {
-	background-color: var(--global-color-back);
+	background-image: linear-gradient(170deg, var(--global-color-back), var(--color-alpha));
 	color: var(--global-color-front);
 }
 
@@ -74,14 +73,21 @@ html {
 }
 
 .c-phone {
-    margin: 0 6rem;
+    margin: 3rem 0;
     display: grid;
-    justify-content: center;
+	justify-content: center;
 }
 
 .c-phone__image {
     max-height: 70vh;
 }
+
+@media (min-width: 36rem) {
+	.c-phone {
+		margin: 0;
+	}
+}
+
 
 .c-form {
 	margin: 1rem auto;
@@ -120,22 +126,32 @@ html {
 }
 
 .c-input {
-	all: unset;
+	box-sizing: border-box;
 	background-color: var(--color-white);
 	color: var(--global-color-back);
 	width: 100%;
 	display: block;
 	font-size: 1.2rem;
 	font-family: inherit;
-	border: none;
+	border: 2px solid transparent;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.10);
 
 	margin-bottom: var(--global-whitespace-xs);
 	border-radius: 4px;
 	padding: var(--global-baseline);
 }
 
+.c-input::selection {
+	background-color: var(--global-color-back);
+	color: var(--color-white)
+}
+
 .c-input::placeholder {
 	color: var(--global-color-back);
+}
+
+.c-input.has-error {
+	border: 2px solid red;
 }
 
 .c-button {
@@ -145,9 +161,20 @@ html {
 	color: var(--global-color-front);
 	border-radius: var(--global-borderRadius);
 	padding: var(--global-whitespace-xs) var(--global-whitespace-sm);
+	cursor: pointer;
 
 	font-size: 1rem;
 	font-weight: bold;
+}
+
+
+.c-errorlabel {
+	/* Give the label a static height, so if the string is empty it doesn't move the layout */
+	height: 1.5rem;
+	display: block;
+
+	color: rgb(255, 202, 202);
+	text-align: center;
 }
 
 .u-text-bold {
