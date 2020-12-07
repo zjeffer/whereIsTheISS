@@ -25,7 +25,9 @@ function validateEmail(input){
     } else if (!isValidEmailAddress(input.value)) {
         addErrorLabel(input, errorLabel, "Please enter a valid email address")
 	} else {
-		removeErrorLabel(input, errorLabel);
+        // valid email, remove label and input value
+        removeErrorLabel(input, errorLabel);
+        input.value = "";
     }    
 }
 
@@ -39,7 +41,6 @@ function init(){
     });
 
     submitButton.addEventListener("click", function (e) {
-        console.log("submit");
         validateEmail(emailInput);
 		e.preventDefault();
 	});
