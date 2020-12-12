@@ -258,7 +258,7 @@ html {
 
 .c-height {
 	font-size: 1.3rem;
-	margin-bottom: 1rem;
+	margin-bottom: 0.5rem;
 }
 
 .c-height__icon {
@@ -268,11 +268,10 @@ html {
 }
 
 .c-height__middle {
-	display: flex;
-	/* TODO: better spacing method */
-	justify-content: space-evenly;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	justify-content: center;
 	align-items: center;
-
 	width: 100%;
 	margin: 0 auto;
 }
@@ -323,4 +322,12 @@ html {
 		width: 7.5rem;
 		height: 7.5rem;
 	}
+}
+
+.u-text-left {
+	text-align: left;
+}
+
+.u-text-right {
+	text-align: right;
 }
