@@ -26,7 +26,6 @@ let html_velocity, html_altitude, html_darkmode_sun, html_darkmode_moon, html_da
 
 // before loading everything else
 function preload() {
-	// TODO: better map?
 	mapImage = loadImage("img/earth.png");
 	ISSImage = loadImage("img/satellite.svg");
 }
@@ -105,13 +104,11 @@ function getISSData() {
 
 // set the velocity html element to the current velocity
 function setVelocity(velocity) {
-	// todo: space between thousands: 7 000 instead of 7000
 	html_velocity.innerText = velocity.toFixed(2);
 }
 
 // set the altitude html element to the current altitude
 function setAltitude(altitude) {
-	// todo: space between thousands: 400 000 instead of 400000
 	html_altitude.innerText = altitude.toFixed(2);
 }
 
@@ -134,23 +131,6 @@ function drawEarth() {
 	// this is dynamically updated using the windowResized() function
 	// sizeX, sizeY, sizeZ, detailX, detailY
 	ellipsoid(width / 2.5, height / 2.5, width / 2.5, 100, 100);
-
-	pop();
-}
-
-//TODO
-function drawOrbit() {
-	push();
-	noStroke();
-	fill(255);
-	lights(255);
-
-	rotateX(-90);
-	// orbital inclination of the ISS orbit = 51.6437 degrees
-	let offset = sin(longitude) * 45;
-	rotateY(offset + 51.6437);
-	// use a torus to display the ISS's orbit
-	torus(width / 3 + width / 20, 2, 50, 50);
 
 	pop();
 }
@@ -179,7 +159,6 @@ function draw() {
 	
 	// create the earth according to the position of the ISS
 	drawEarth();
-	//drawOrbit();
 	// draw the ISS image above the earth
 	drawISS();
 }
